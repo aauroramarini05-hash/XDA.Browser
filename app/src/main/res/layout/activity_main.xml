@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Barra URL -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -14,7 +15,7 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Enter URL" />
+            android:hint="Search or enter URL" />
 
         <Button
             android:id="@+id/btnGo"
@@ -23,10 +24,31 @@
             android:text="Go" />
     </LinearLayout>
 
-    <WebView
-        android:id="@+id/webView"
+    <!-- Pulsanti extra -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnNewTab"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="New Tab" />
+
+        <Button
+            android:id="@+id/btnFavorite"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Fav" />
+    </LinearLayout>
+
+    <!-- Contenitore WebView -->
+    <FrameLayout
+        android:id="@+id/webContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
 </LinearLayout>
