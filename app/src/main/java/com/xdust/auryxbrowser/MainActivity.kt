@@ -1,32 +1,55 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+package com.xdust.auryxbrowser
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+import android.app.DownloadManager
+import android.net.Uri
+import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.appcompat.app.AppCompatActivity
+import android.widget.Button
+import android.widget.EditText
 
-        <EditText
-            android:id="@+id/edUrl"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="Enter URL"/>
+class MainActivity : AppCompatActivity() {
 
-        <Button
-            android:id="@+id/btnGo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Go"/>
-    </LinearLayout>
+    private lateinit var webView: WebView
 
-    <WebView
-        android:id="@+id/webView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-</LinearLayout>
+        webView = findViewById(R.id.webView)
+        val edUrl = findViewById<EditText>(R.id.edUrl)
+        val btnGo = findViewById<Button>(R.id.btnGo)
+
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.webViewClient = WebViewClient()
+
+        webView.setDownloadListener { url, _, _, _, _ ->
+            val request = DownloadManager.Request(Uri.parse(url))
+            request.setNotificationVisibility(
+                DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED
+            )
+            val dm = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
+            dm.enqueue(request)
+        }
+
+        btnGo.setOnClickListener {
+            var url = edUrl.text.toString()
+            if (!url.startsWith("http")) {
+                url = "https://$url"
+            }
+            webView.loadUrl(url)
+        }
+
+        webView.loadUrl("https://www.google.com")
+    }
+
+    override fun onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
+        }
+    }
+}
