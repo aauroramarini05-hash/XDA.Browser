@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AuryxBrowser</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #111, #1c1c1c);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+.search-box {
+    width: 80%;
+    max-width: 500px;
+    margin-bottom: 40px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 8px;
+    border: none;
+    font-size: 18px;
+}
+
+.shortcuts {
+    display: grid;
+    grid-template-columns: repeat(2, 150px);
+    gap: 20px;
+}
+
+.shortcut {
+    background: #222;
+    padding: 20px;
+    text-align: center;
+    border-radius: 12px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.shortcut:hover {
+    background: #333;
+}
+</style>
+</head>
+<body>
+
+<h1>AuryxBrowser</h1>
+
+<div class="search-box">
+    <input type="text" placeholder="Search or enter URL"
+           onkeydown="if(event.key==='Enter'){ window.location.href='https://www.google.com/search?q='+this.value }">
+</div>
+
+<div class="shortcuts">
+    <a class="shortcut" href="https://www.google.com">Google</a>
+    <a class="shortcut" href="https://www.youtube.com">YouTube</a>
+    <a class="shortcut" href="https://www.wikipedia.org">Wikipedia</a>
+    <a class="shortcut" href="https://auryxtrends.it">AuryxTrends</a>
+</div>
+
+</body>
+</html>
