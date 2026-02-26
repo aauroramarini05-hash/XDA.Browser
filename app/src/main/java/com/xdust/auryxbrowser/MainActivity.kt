@@ -2,18 +2,24 @@ package com.xdust.auryxbrowser
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.inputmethod.EditorInfo
+import android.view.View
+import android.webkit.CookieManager
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
-import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
-    private lateinit var addressBar: AutoCompleteTextView
+    private lateinit var addressBar: EditText
+    private lateinit var drawerLayout: DrawerLayout
+
+    private var desktopMode = false
+    private var incognitoMode = false
 
     @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,54 +28,81 @@ class MainActivity : AppCompatActivity() {
 
         webView = findViewById(R.id.webView)
         addressBar = findViewById(R.id.addressBar)
+        drawerLayout = findViewById(R.id.drawerLayout)
 
-        setupWebView()
-        loadHomePage()
+        webView.webViewClient = WebViewClient()
+        webView.settings.javaScriptEnabled = true
+        webView.settings.domStorageEnabled = true
+        webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
 
-        addressBar.setOnEditorActionListener { _, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_GO ||
-                event?.keyCode == KeyEvent.KEYCODE_ENTER) {
+        // Pulsanti homepage
+        findViewById<Button>(R.id.btnGoogle).setOnClickListener {
+            loadUrl("https://www.google.com")
+        }
 
-                val input = addressBar.text.toString().trim()
-                loadInput(input)
-                true
+        findViewById<Button>(R.id.btnYouTube).setOnClickListener {
+            loadUrl("https://www.youtube.com")
+        }
+
+        findViewById<Button>(R.id.btnWikipedia).setOnClickListener {
+            loadUrl("https://www.wikipedia.org")
+        }
+
+        findViewById<Button>(R.id.btnAuryx).setOnClickListener {
+            loadUrl("https://auryxtrends.it")
+        }
+
+        // Desktop Mode
+        findViewById<Button>(R.id.btnDesktopMode).setOnClickListener {
+            desktopMode = !desktopMode
+            webView.settings.useWideViewPort = desktopMode
+            webView.settings.loadWithOverviewMode = desktopMode
+            webView.settings.userAgentString =
+                if (desktopMode)
+                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+                else
+                    WebSettings.getDefaultUserAgent(this)
+        }
+
+        // Incognito Mode
+        findViewById<Button>(R.id.btnIncognito).setOnClickListener {
+            incognitoMode = !incognitoMode
+
+            if (incognitoMode) {
+                webView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
+                webView.clearHistory()
+                webView.clearCache(true)
+                CookieManager.getInstance().removeAllCookies(null)
             } else {
-                false
+                webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
             }
         }
-    }
 
-    private fun setupWebView() {
-        webView.webViewClient = WebViewClient()
-
-        val settings: WebSettings = webView.settings
-        settings.javaScriptEnabled = true
-        settings.domStorageEnabled = true
-        settings.loadsImagesAutomatically = true
-        settings.useWideViewPort = true
-        settings.loadWithOverviewMode = true
-        settings.builtInZoomControls = true
-        settings.displayZoomControls = false
-    }
-
-    private fun loadHomePage() {
-        webView.loadUrl("file:///android_asset/home.html")
-    }
-
-    private fun loadInput(input: String) {
-        if (input.isEmpty()) {
-            loadHomePage()
-            return
+        // History (semplice: torna indietro)
+        findViewById<Button>(R.id.btnHistory).setOnClickListener {
+            if (webView.canGoBack()) {
+                webView.goBack()
+            }
         }
 
-        val url = if (input.startsWith("http://") || input.startsWith("https://")) {
-            input
-        } else if (input.contains(".")) {
-            "https://$input"
-        } else {
-            "https://www.google.com/search?q=$input"
+        // Barra indirizzi
+        addressBar.setOnEditorActionListener { _, _, _ ->
+            var url = addressBar.text.toString()
+
+            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                url = "https://www.google.com/search?q=$url"
+            }
+
+            loadUrl(url)
+            true
         }
 
+        // Pagina iniziale
+        webView.loadUrl("https://www.google.com")
+    }
+
+    private fun loadUrl(url: String) {
+        webView.visibility = View.VISIBLE
         webView.loadUrl(url)
     }
 
