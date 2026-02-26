@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- CONTENUTO PRINCIPALE -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -36,7 +37,17 @@
                 android:hint="Search or enter URL"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#AAAAAA"
+                android:imeOptions="actionGo"
+                android:singleLine="true"
                 android:padding="8dp"/>
+
+            <ImageButton
+                android:id="@+id/btnGo"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_media_play"
+                android:tint="#FFFFFF"/>
 
             <ImageButton
                 android:id="@+id/btnRefresh"
@@ -106,39 +117,10 @@
                 android:layout_height="match_parent"
                 android:visibility="gone"/>
         </FrameLayout>
+
     </LinearLayout>
 
-    <!-- DRAWER LATERALE -->
-    <LinearLayout
-        android:layout_width="260dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#1E1E1E"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-        <TextView
-            android:text="Browser Settings"
-            android:textSize="18sp"
-            android:textColor="#FFFFFF"
-            android:layout_marginBottom="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btnDesktopMode"
-            style="@style/SideButton"
-            android:text="Desktop Mode"/>
-
-        <Button
-            android:id="@+id/btnIncognito"
-            style="@style/SideButton"
-            android:text="Incognito Mode"/>
-
-        <Button
-            android:id="@+id/btnHome"
-            style="@style/SideButton"
-            android:text="Homepage"/>
-    </LinearLayout>
+    <!-- DRAWER -->
+    <include layout="@layout/drawer_menu"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
