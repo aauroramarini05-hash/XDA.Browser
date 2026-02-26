@@ -1,37 +1,50 @@
 package com.xdust.auryxbrowser
 
-import android.annotation.SuppressLint
 import android.os.Bundle
-import android.webkit.CookieManager
+import android.view.KeyEvent
+import android.view.View
+import android.webkit.WebChromeClient
 import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var webView: WebView
     private lateinit var addressBar: EditText
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var homeLayout: LinearLayout
 
-    private var desktopMode = false
-    private var incognitoMode = false
-
-    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         webView = findViewById(R.id.webView)
         addressBar = findViewById(R.id.addressBar)
-        drawerLayout = findViewById(R.id.drawerLayout)
+        homeLayout = findViewById(R.id.homeLayout)
 
+        setupWebView()
+        setupHomepageButtons()
+        setupAddressBar()
+    }
+
+    private fun setupWebView() {
         webView.webViewClient = WebViewClient()
-        webView.settings.javaScriptEnabled = true
-        webView.settings.domStorageEnabled = true
+        webView.webChromeClient = WebChromeClient()
+
+        val settings: WebSettings = webView.settings
+        settings.javaScriptEnabled = true
+        settings.domStorageEnabled = true
+        settings.loadWithOverviewMode = true
+        settings.useWideViewPort = true
+        settings.builtInZoomControls = true
+        settings.displayZoomControls = false
+    }
+
+    private fun setupHomepageButtons() {
 
         findViewById<Button>(R.id.btnGoogle).setOnClickListener {
             loadUrl("https://www.google.com")
@@ -46,54 +59,40 @@ class MainActivity : AppCompatActivity() {
         }
 
         findViewById<Button>(R.id.btnAuryx).setOnClickListener {
-            loadUrl("https://auryxtrends.it")
+            loadUrl("https://www.google.com/search?q=Auryx+Trends")
         }
+    }
 
-        findViewById<Button>(R.id.btnDesktopMode).setOnClickListener {
-            desktopMode = !desktopMode
-            webView.settings.useWideViewPort = desktopMode
-            webView.settings.loadWithOverviewMode = desktopMode
-        }
+    private fun setupAddressBar() {
+        addressBar.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_DOWN) {
+                var url = addressBar.text.toString()
 
-        findViewById<Button>(R.id.btnIncognito).setOnClickListener {
-            incognitoMode = !incognitoMode
-            if (incognitoMode) {
-                webView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
-                webView.clearHistory()
-                webView.clearCache(true)
-                CookieManager.getInstance().removeAllCookies(null)
+                if (!url.startsWith("http://") && !url.startsWith("https://")) {
+                    url = "https://www.google.com/search?q=$url"
+                }
+
+                loadUrl(url)
+                true
             } else {
-                webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
+                false
             }
         }
-
-        findViewById<Button>(R.id.btnHistory).setOnClickListener {
-            if (webView.canGoBack()) {
-                webView.goBack()
-            }
-        }
-
-        addressBar.setOnEditorActionListener { _, _, _ ->
-            var url = addressBar.text.toString()
-
-            if (!url.startsWith("http")) {
-                url = "https://www.google.com/search?q=$url"
-            }
-
-            loadUrl(url)
-            true
-        }
-
-        webView.loadUrl("https://www.google.com")
     }
 
     private fun loadUrl(url: String) {
+        homeLayout.visibility = View.GONE
+        webView.visibility = View.VISIBLE
         webView.loadUrl(url)
+        addressBar.setText(url)
     }
 
     override fun onBackPressed() {
-        if (webView.canGoBack()) {
+        if (webView.visibility == View.VISIBLE && webView.canGoBack()) {
             webView.goBack()
+        } else if (webView.visibility == View.VISIBLE) {
+            webView.visibility = View.GONE
+            homeLayout.visibility = View.VISIBLE
         } else {
             super.onBackPressed()
         }
