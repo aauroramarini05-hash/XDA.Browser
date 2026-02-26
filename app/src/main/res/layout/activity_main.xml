@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -14,59 +13,64 @@
         android:background="@drawable/bg_gradient"
         android:padding="16dp">
 
+        <!-- Barra indirizzi -->
         <EditText
             android:id="@+id/addressBar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Search or enter URL"
-            android:textColor="@android:color/white"
+            android:textColor="#FFFFFF"
             android:textColorHint="#CCCCCC"
             android:background="@drawable/rounded_input"
-            android:padding="12dp"
-            android:drawableStart="@android:drawable/ic_menu_search"
-            android:drawablePadding="8dp"/>
+            android:padding="12dp"/>
 
+        <!-- Titolo -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="AuryxBrowser"
-            android:textSize="32sp"
+            android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="40dp"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="24dp"
             android:layout_gravity="center"/>
 
+        <!-- Pulsanti homepage -->
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="24dp">
 
             <Button
                 android:id="@+id/btnGoogle"
                 style="@style/SiteButton"
-                android:text=" Google"
-                android:drawableStart="@android:drawable/ic_menu_search"/>
+                android:text="Google"/>
 
             <Button
                 android:id="@+id/btnYouTube"
                 style="@style/SiteButton"
-                android:text=" YouTube"
-                android:drawableStart="@android:drawable/ic_media_play"/>
+                android:text="YouTube"/>
 
             <Button
                 android:id="@+id/btnWikipedia"
                 style="@style/SiteButton"
-                android:text=" Wikipedia"
-                android:drawableStart="@android:drawable/ic_menu_info_details"/>
+                android:text="Wikipedia"/>
 
             <Button
                 android:id="@+id/btnAuryx"
                 style="@style/SiteButton"
-                android:text=" AuryxTrends"
-                android:drawableStart="@android:drawable/ic_menu_view"/>
+                android:text="AuryxTrends"/>
 
         </GridLayout>
+
+        <!-- WebView -->
+        <WebView
+            android:id="@+id/webView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 
@@ -80,9 +84,11 @@
         android:padding="16dp">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Menu"
-            android:textColor="@android:color/white"
             android:textSize="20sp"
+            android:textColor="#FFFFFF"
             android:layout_marginBottom="20dp"/>
 
         <Button
@@ -93,12 +99,12 @@
         <Button
             android:id="@+id/btnIncognito"
             style="@style/SideButton"
-            android:text="Incognito"/>
+            android:text="Incognito Mode"/>
 
         <Button
             android:id="@+id/btnHistory"
             style="@style/SideButton"
-            android:text="History"/>
+            android:text="Back"/>
 
     </LinearLayout>
 
