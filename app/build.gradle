@@ -11,25 +11,18 @@ android {
         applicationId "com.xdust.auryxbrowser"
         minSdk 21
         targetSdk 34
-        versionCode 225001
+        versionCode 226001
         versionName "1.226.01-beta"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     signingConfigs {
         release {
-            def keystorePassword = System.getenv("KEYSTORE_PASSWORD")
-            def keyAliasEnv = System.getenv("KEY_ALIAS")
-            def keyPasswordEnv = System.getenv("KEY_PASSWORD")
-
-            if (keystorePassword != null &&
-                keyAliasEnv != null &&
-                keyPasswordEnv != null) {
-
-                storeFile file("$rootDir/release.keystore")
-                storePassword keystorePassword
-                keyAlias keyAliasEnv
-                keyPassword keyPasswordEnv
-            }
+            storeFile file("keystore.jks")
+            storePassword System.getenv("KEYSTORE_PASSWORD")
+            keyAlias System.getenv("KEY_ALIAS")
+            keyPassword System.getenv("KEY_PASSWORD")
         }
     }
 
@@ -55,7 +48,7 @@ android {
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.13.1'
+    implementation 'androidx.core:core-ktx:1.12.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'com.google.android.material:material:1.11.0'
 }
