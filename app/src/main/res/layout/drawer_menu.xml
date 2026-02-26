@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="260dp"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#1E1E1E"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:text="Browser Settings"
+        android:textSize="18sp"
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/btnDesktopMode"
+        style="@style/SideButton"
+        android:text="Desktop Mode"/>
+
+    <Button
+        android:id="@+id/btnIncognitoMode"
+        style="@style/SideButton"
+        android:text="Incognito Mode"/>
+
+    <Button
+        android:id="@+id/btnHomepage"
+        style="@style/SideButton"
+        android:text="Homepage"/>
+
+    <!-- SPACER -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <!-- VERSION -->
+    <TextView
+        android:id="@+id/tvVersion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Version"
+        android:paddingTop="16dp"
+        android:textColor="#B0B0B0"
+        android:textSize="14sp"/>
+
+    <!-- UPDATE BADGE -->
+    <TextView
+        android:id="@+id/tvUpdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Aggiornamento disponibile"
+        android:padding="12dp"
+        android:textColor="#000000"
+        android:background="#FFD400"
+        android:textStyle="bold"
+        android:visibility="gone"/>
+</LinearLayout>
