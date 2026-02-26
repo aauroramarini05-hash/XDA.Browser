@@ -16,7 +16,7 @@
         android:label="AuryxBrowser"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/Theme.AuryxBrowser">
 
         <!-- Launcher normale (telefono) -->
         <activity
