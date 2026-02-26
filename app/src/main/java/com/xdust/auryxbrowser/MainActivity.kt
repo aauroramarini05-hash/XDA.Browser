@@ -2,7 +2,6 @@ package com.xdust.auryxbrowser
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.View
 import android.webkit.CookieManager
 import android.webkit.WebSettings
 import android.webkit.WebView
@@ -33,9 +32,7 @@ class MainActivity : AppCompatActivity() {
         webView.webViewClient = WebViewClient()
         webView.settings.javaScriptEnabled = true
         webView.settings.domStorageEnabled = true
-        webView.settings.cacheMode = WebSettings.LOAD_DEFAULT
 
-        // Pulsanti homepage
         findViewById<Button>(R.id.btnGoogle).setOnClickListener {
             loadUrl("https://www.google.com")
         }
@@ -52,22 +49,14 @@ class MainActivity : AppCompatActivity() {
             loadUrl("https://auryxtrends.it")
         }
 
-        // Desktop Mode
         findViewById<Button>(R.id.btnDesktopMode).setOnClickListener {
             desktopMode = !desktopMode
             webView.settings.useWideViewPort = desktopMode
             webView.settings.loadWithOverviewMode = desktopMode
-            webView.settings.userAgentString =
-                if (desktopMode)
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
-                else
-                    WebSettings.getDefaultUserAgent(this)
         }
 
-        // Incognito Mode
         findViewById<Button>(R.id.btnIncognito).setOnClickListener {
             incognitoMode = !incognitoMode
-
             if (incognitoMode) {
                 webView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
                 webView.clearHistory()
@@ -78,18 +67,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // History (semplice: torna indietro)
         findViewById<Button>(R.id.btnHistory).setOnClickListener {
             if (webView.canGoBack()) {
                 webView.goBack()
             }
         }
 
-        // Barra indirizzi
         addressBar.setOnEditorActionListener { _, _, _ ->
             var url = addressBar.text.toString()
 
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            if (!url.startsWith("http")) {
                 url = "https://www.google.com/search?q=$url"
             }
 
@@ -97,12 +84,10 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
-        // Pagina iniziale
         webView.loadUrl("https://www.google.com")
     }
 
     private fun loadUrl(url: String) {
-        webView.visibility = View.VISIBLE
         webView.loadUrl(url)
     }
 
