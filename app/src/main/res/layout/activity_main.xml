@@ -1,54 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- Barra URL -->
+    <!-- Top bar -->
     <LinearLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <EditText
-            android:id="@+id/edUrl"
-            android:layout_weight="1"
+        <AutoCompleteTextView
+            android:id="@+id/etUrl"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Search or enter URL" />
+            android:layout_weight="1"
+            android:hint="Cerca o inserisci URL"
+            android:imeOptions="actionGo"
+            android:singleLine="true"
+            android:inputType="textUri" />
 
         <Button
             android:id="@+id/btnGo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Go" />
+            android:text="Vai" />
     </LinearLayout>
 
-    <!-- Pulsanti extra -->
+    <!-- Actions row -->
     <LinearLayout
+        android:id="@+id/actionsRow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingBottom="8dp">
 
         <Button
             android:id="@+id/btnNewTab"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="New Tab" />
+            android:text="+Tab" />
 
         <Button
-            android:id="@+id/btnFavorite"
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:id="@+id/btnNextTab"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Next" />
+
+        <Button
+            android:id="@+id/btnCloseTab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Close" />
+
+        <Button
+            android:id="@+id/btnFav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Fav" />
+
+        <Button
+            android:id="@+id/btnDesktop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Desktop: OFF" />
     </LinearLayout>
 
-    <!-- Contenitore WebView -->
+    <!-- WebView container (we swap WebViews for tabs) -->
     <FrameLayout
         android:id="@+id/webContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
 </LinearLayout>
