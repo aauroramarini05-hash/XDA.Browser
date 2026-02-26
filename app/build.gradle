@@ -11,7 +11,7 @@ android {
         applicationId "com.xdust.auryxbrowser"
         minSdk 21
         targetSdk 34
-        versionCode 226001
+        versionCode 227001
         versionName "1.226.01-beta"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
