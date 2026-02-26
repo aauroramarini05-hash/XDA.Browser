@@ -11,7 +11,7 @@ android {
         applicationId "com.xdust.auryxbrowser"
         minSdk 21
         targetSdk 34
-        versionCode 122501
+        versionCode 225001
         versionName "1.225.01"
     }
 
