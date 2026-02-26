@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.drawerlayout.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -12,7 +11,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- ===== TOP BAR ===== -->
+        <!-- TOP BAR -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
@@ -38,11 +37,10 @@
                 android:hint="Search or enter URL"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#BBBBBB"
-                android:background="@drawable/rounded_input"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:inputType="textUri"
-                android:singleLine="true"/>
+                android:background="@android:drawable/edit_text"
+                android:padding="8dp"
+                android:singleLine="true"
+                android:inputType="textUri"/>
 
             <!-- GO BUTTON -->
             <ImageView
@@ -55,9 +53,8 @@
 
         </LinearLayout>
 
-        <!-- ===== HOME CARDS ===== -->
+        <!-- HOME BUTTONS -->
         <GridLayout
-            android:id="@+id/homeGrid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:columnCount="2"
@@ -70,9 +67,9 @@
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
                 android:orientation="vertical"
-                android:background="@drawable/home_card"
                 android:layout_margin="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="#1F2C38">
 
                 <ImageView
                     android:layout_width="48dp"
@@ -93,9 +90,9 @@
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
                 android:orientation="vertical"
-                android:background="@drawable/home_card"
                 android:layout_margin="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="#1F2C38">
 
                 <ImageView
                     android:layout_width="48dp"
@@ -116,9 +113,9 @@
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
                 android:orientation="vertical"
-                android:background="@drawable/home_card"
                 android:layout_margin="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="#1F2C38">
 
                 <ImageView
                     android:layout_width="48dp"
@@ -132,16 +129,16 @@
                     android:layout_marginTop="6dp"/>
             </LinearLayout>
 
-            <!-- AURYXTRENDS -->
+            <!-- AURYX -->
             <LinearLayout
                 android:id="@+id/btnAuryx"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:layout_columnWeight="1"
                 android:orientation="vertical"
-                android:background="@drawable/home_card"
                 android:layout_margin="8dp"
-                android:gravity="center">
+                android:gravity="center"
+                android:background="#1F2C38">
 
                 <ImageView
                     android:layout_width="48dp"
@@ -157,7 +154,7 @@
 
         </GridLayout>
 
-        <!-- ===== WEBVIEW ===== -->
+        <!-- WEBVIEW -->
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
@@ -166,9 +163,8 @@
 
     </LinearLayout>
 
-    <!-- ===== DRAWER LATERALE ===== -->
+    <!-- DRAWER LATERALE -->
     <LinearLayout
-        android:id="@+id/drawerMenu"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
@@ -187,34 +183,23 @@
             android:text="Desktop Mode"
             android:textColor="#FFFFFF"
             android:padding="12dp"
-            android:background="@drawable/home_card"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:background="#2A2A2A"/>
 
         <TextView
             android:id="@+id/btnIncognito"
             android:text="Incognito Mode"
             android:textColor="#FFFFFF"
             android:padding="12dp"
-            android:background="@drawable/home_card"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="8dp"
+            android:background="#2A2A2A"/>
 
         <TextView
             android:id="@+id/btnHomepage"
             android:text="Homepage"
             android:textColor="#FFFFFF"
             android:padding="12dp"
-            android:background="@drawable/home_card"
-            android:layout_marginBottom="8dp"/>
-
-        <View
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_width="match_parent"/>
-
-        <TextView
-            android:text="Version 1.226.01"
-            android:textColor="#AAAAAA"
-            android:textSize="12sp"/>
+            android:background="#2A2A2A"/>
 
     </LinearLayout>
 
