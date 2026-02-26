@@ -27,17 +27,41 @@ class MainActivity : AppCompatActivity() {
         val settings: WebSettings = webView.settings
         settings.javaScriptEnabled = true
         settings.domStorageEnabled = true
+        settings.loadsImagesAutomatically = true
+        settings.useWideViewPort = true
+        settings.loadWithOverviewMode = true
 
         webView.loadUrl("https://www.google.com")
 
         goButton.setOnClickListener {
-            var url = urlBar.text.toString()
+            loadInput()
+        }
+    }
 
-            if (!url.startsWith("http://") && !url.startsWith("https://")) {
-                url = "https://$url"
+    private fun loadInput() {
+        var input = urlBar.text.toString().trim()
+
+        if (input.isEmpty()) return
+
+        if (input.contains(" ") || !input.contains(".")) {
+            val searchUrl = "https://www.google.com/search?q=" +
+                    input.replace(" ", "+")
+            webView.loadUrl(searchUrl)
+        } else {
+            if (!input.startsWith("http://") &&
+                !input.startsWith("https://")
+            ) {
+                input = "https://$input"
             }
+            webView.loadUrl(input)
+        }
+    }
 
-            webView.loadUrl(url)
+    override fun onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack()
+        } else {
+            super.onBackPressed()
         }
     }
 }
