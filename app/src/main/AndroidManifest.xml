@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.xdust.auryxbrowser"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.xdust.auryxbrowser">
 
+    <!-- Permesso Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Supporto TV (Leanback) -->
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
 
     <application
         android:allowBackup="true"
-        android:label="AuryxBrowser"
         android:icon="@mipmap/ic_launcher"
+        android:label="AuryxBrowser"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.DayNight.NoActionBar">
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
 
+        <!-- Launcher normale (telefono) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -19,6 +26,12 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Launcher per Android TV -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
 
         </activity>
