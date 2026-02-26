@@ -17,10 +17,19 @@ android {
 
     signingConfigs {
         release {
-            storeFile file("$rootDir/release.keystore")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
+            def keystorePassword = System.getenv("KEYSTORE_PASSWORD")
+            def keyAliasEnv = System.getenv("KEY_ALIAS")
+            def keyPasswordEnv = System.getenv("KEY_PASSWORD")
+
+            if (keystorePassword != null &&
+                keyAliasEnv != null &&
+                keyPasswordEnv != null) {
+
+                storeFile file("$rootDir/release.keystore")
+                storePassword keystorePassword
+                keyAlias keyAliasEnv
+                keyPassword keyPasswordEnv
+            }
         }
     }
 
@@ -29,6 +38,9 @@ android {
             signingConfig signingConfigs.release
             minifyEnabled false
             shrinkResources false
+        }
+        debug {
+            minifyEnabled false
         }
     }
 
