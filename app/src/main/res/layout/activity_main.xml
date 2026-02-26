@@ -5,90 +5,121 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- CONTENITORE PRINCIPALE -->
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_gradient">
+        android:orientation="vertical">
 
-        <!-- HOMEPAGE -->
+        <!-- TOOLBAR -->
         <LinearLayout
-            android:id="@+id/homeLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="56dp"
+            android:background="#121212"
+            android:gravity="center_vertical"
+            android:padding="8dp">
+
+            <ImageButton
+                android:id="@+id/btnMenu"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_menu_sort_by_size"
+                android:tint="#FFFFFF"/>
 
             <EditText
                 android:id="@+id/addressBar"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:hint="Search or enter URL"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="8dp"
                 android:background="@drawable/rounded_input"
+                android:hint="Search or enter URL"
                 android:textColor="#FFFFFF"
-                android:textColorHint="#CCCCCC"
-                android:padding="12dp"/>
+                android:textColorHint="#AAAAAA"
+                android:padding="8dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="AuryxBrowser"
-                android:textSize="28sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="24dp"
-                android:layout_gravity="center"/>
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:layout_marginTop="24dp">
-
-                <Button
-                    android:id="@+id/btnGoogle"
-                    style="@style/SiteButton"
-                    android:text="Google"/>
-
-                <Button
-                    android:id="@+id/btnYouTube"
-                    style="@style/SiteButton"
-                    android:text="YouTube"/>
-
-                <Button
-                    android:id="@+id/btnWikipedia"
-                    style="@style/SiteButton"
-                    android:text="Wikipedia"/>
-
-                <Button
-                    android:id="@+id/btnAuryx"
-                    style="@style/SiteButton"
-                    android:text="AuryxTrends"/>
-            </GridLayout>
-
+            <ImageButton
+                android:id="@+id/btnRefresh"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@android:color/transparent"
+                android:src="@android:drawable/ic_popup_sync"
+                android:tint="#FFFFFF"/>
         </LinearLayout>
 
-        <!-- WEBVIEW FULLSCREEN -->
-        <WebView
-            android:id="@+id/webView"
+        <!-- CONTENITORE -->
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"/>
+            android:background="@drawable/bg_gradient">
 
-    </FrameLayout>
+            <!-- HOMEPAGE -->
+            <LinearLayout
+                android:id="@+id/homeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
 
-    <!-- MENU LATERALE -->
+                <TextView
+                    android:text="AuryxBrowser"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:columnCount="2"
+                    android:layout_marginTop="24dp">
+
+                    <Button
+                        android:id="@+id/btnGoogle"
+                        style="@style/SiteButton"
+                        android:text="Google"/>
+
+                    <Button
+                        android:id="@+id/btnYouTube"
+                        style="@style/SiteButton"
+                        android:text="YouTube"/>
+
+                    <Button
+                        android:id="@+id/btnWikipedia"
+                        style="@style/SiteButton"
+                        android:text="Wikipedia"/>
+
+                    <Button
+                        android:id="@+id/btnAuryx"
+                        style="@style/SiteButton"
+                        android:text="AuryxTrends"/>
+                </GridLayout>
+
+            </LinearLayout>
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- DRAWER LATERALE -->
     <LinearLayout
-        android:layout_width="280dp"
+        android:layout_width="260dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:background="#1E1E1E"
         android:orientation="vertical"
-        android:background="#121212"
         android:padding="16dp">
 
         <TextView
-            android:text="Menu"
-            android:textSize="20sp"
+            android:text="Browser Settings"
+            android:textSize="18sp"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="20dp"
             android:layout_width="wrap_content"
@@ -105,9 +136,9 @@
             android:text="Incognito Mode"/>
 
         <Button
-            android:id="@+id/btnHistory"
+            android:id="@+id/btnHome"
             style="@style/SideButton"
-            android:text="Back"/>
+            android:text="Homepage"/>
     </LinearLayout>
 
 </androidx.drawerlayout.widget.DrawerLayout>
