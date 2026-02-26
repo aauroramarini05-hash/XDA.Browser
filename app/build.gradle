@@ -4,33 +4,27 @@ plugins {
 }
 
 android {
-    namespace 'com.xdust.auryxbrowser'
+    namespace "com.xdust.auryxbrowser"
     compileSdk 34
 
     defaultConfig {
         applicationId "com.xdust.auryxbrowser"
         minSdk 21
         targetSdk 34
-        versionCode 227001
-        versionName "1.226.01-beta"
+        versionCode 122601
+        versionName "1.226.01"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    signingConfigs {
-        release {
-            storeFile file("keystore.jks")
-            storePassword System.getenv("KEYSTORE_PASSWORD")
-            keyAlias System.getenv("KEY_ALIAS")
-            keyPassword System.getenv("KEY_PASSWORD")
-        }
+    buildFeatures {
+        buildConfig true
     }
 
     buildTypes {
         release {
-            signingConfig signingConfigs.release
             minifyEnabled false
-            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
         debug {
             minifyEnabled false
@@ -43,12 +37,20 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = '17'
+        jvmTarget = "17"
     }
 }
 
 dependencies {
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
+
+    implementation "androidx.core:core-ktx:1.12.0"
+    implementation "androidx.appcompat:appcompat:1.6.1"
+    implementation "com.google.android.material:material:1.11.0"
+    implementation "androidx.constraintlayout:constraintlayout:2.1.4"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.22"
+
+    testImplementation "junit:junit:4.13.2"
+    androidTestImplementation "androidx.test.ext:junit:1.1.5"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.5.1"
 }
