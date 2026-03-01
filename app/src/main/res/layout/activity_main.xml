@@ -11,14 +11,16 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- Top Bar -->
+        <!-- TOP BAR -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:orientation="horizontal"
             android:padding="8dp"
-            android:background="#0D2B2E">
+            android:background="#0D2B2E"
+            android:gravity="center_vertical">
 
+            <!-- MENU BUTTON -->
             <ImageView
                 android:id="@+id/menuButton"
                 android:layout_width="32dp"
@@ -26,6 +28,7 @@
                 android:src="@android:drawable/ic_menu_sort_by_size"
                 android:tint="#FFFFFF" />
 
+            <!-- URL BAR -->
             <EditText
                 android:id="@+id/urlBar"
                 android:layout_width="0dp"
@@ -34,9 +37,10 @@
                 android:layout_marginStart="8dp"
                 android:hint="Search or enter URL"
                 android:textColor="#FFFFFF"
-                android:hintTextColor="#BBBBBB"
-                android:background="@android:color/transparent" />
+                android:background="@android:color/transparent"
+                android:singleLine="true" />
 
+            <!-- GO BUTTON -->
             <ImageView
                 android:id="@+id/goButton"
                 android:layout_width="32dp"
@@ -47,7 +51,7 @@
 
         </LinearLayout>
 
-        <!-- WebView -->
+        <!-- WEBVIEW -->
         <WebView
             android:id="@+id/webView"
             android:layout_width="match_parent"
@@ -55,7 +59,7 @@
 
     </LinearLayout>
 
-    <!-- Drawer -->
+    <!-- DRAWER -->
     <LinearLayout
         android:layout_width="280dp"
         android:layout_height="match_parent"
@@ -65,14 +69,18 @@
         android:background="#121212">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="AuryxBrowser"
             android:textSize="18sp"
             android:textColor="#FFFFFF"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp" />
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Version 1.226.01"
-            android:textColor="#BBBBBB"/>
+            android:textColor="#BBBBBB" />
 
     </LinearLayout>
 
